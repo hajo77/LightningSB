@@ -1,0 +1,6 @@
+<aura:event type="APPLICATION" description="Plot Marker Event" >
+    <aura:attribute name="lat" type="String" />
+    <aura:attribute name="long" type="String" />
+    <aura:attribute name="label" type="String" />
+    <aura:attribute name="sobjectid" type="String" />
+</aura:event>

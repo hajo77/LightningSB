@@ -1,0 +1,4 @@
+/* remove unnecessary whitespace label */
+.THIS .label-hidden > label {
+    display: none;
+}

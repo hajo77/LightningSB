@@ -1,0 +1,48 @@
+<aura:component implements="flexipage:availableForAllPageTypes">
+    
+    <aura:attribute name="boat" type="Boat__c" />
+    <aura:attribute name="Id" type="Id" />
+    <aura:attribute name="recordError" type="String" />
+    
+    <!-- no need name for application event -->
+    <aura:handler event="c:BoatSelected" action="{!c.onBoatSelected}" />
+    <aura:handler event="c:BoatReviewAdded" action="{!c.onBoatReviewAdded}" name="boatReviewAdded"/> 
+    
+    <force:recordData aura:id="service"
+                      recordId="{!v.Id}"
+                      fields="Id,
+                              Name,
+                              Description__c,
+                              Price__c,
+                              Length__c,
+                              Contact__r.Name,
+                              Contact__r.Email,
+                              Contact__r.HomePhone,
+                              BoatType__r.Name,
+                              Picture__c"
+                      targetFields="{!v.boat}"
+                      targetError="{!v.recordError}"
+                      recordUpdated="{!c.onRecordUpdated}"/>
+    
+    
+    <aura:if isTrue='{!v.boat != undefined}'>
+        <lightning:card >
+            <lightning:tabset aura:id="tabs" >
+                <lightning:tab label="Details">
+                    <c:BoatDetail boat="{!v.boat}"/>
+                </lightning:tab>
+                
+                <lightning:tab label="Reviews" id="boatreviewtab">
+                    <c:BoatReviews boat="{!v.boat}" aura:id="brc" />
+                </lightning:tab>
+                
+                <lightning:tab label="Add Review">
+                    <c:AddBoatReview boat="{!v.boat}"/>
+                </lightning:tab>
+                
+            </lightning:tabset>
+            
+            
+        </lightning:card>
+    </aura:if>
+</aura:component>
